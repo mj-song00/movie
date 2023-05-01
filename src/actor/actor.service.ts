@@ -1,28 +1,63 @@
-import { Injectable } from '@nestjs/common';
+import { PrismaService } from './../prisma/prisma.service';
+import {
+  BadRequestException,
+  Injectable,
+  NotImplementedException,
+} from '@nestjs/common';
 import { CreateActorDto } from './dto/create-actor.dto';
 import { UpdateActorDto } from './dto/update-actor.dto';
 
 @Injectable()
 export class ActorService {
-  create(createActorDto: CreateActorDto) {
-    console.log(createActorDto);
+  constructor(private prismaService: PrismaService) {}
+
+  async create(createActorDto: CreateActorDto) {
     const { actorName } = createActorDto;
-    // return 'This action adds a new actor';
+    if (actorName === null || actorName === undefined)
+      throw new BadRequestException();
+
+    const actor = await this.prismaService.actor.create({
+      data: { actorName },
+    });
+    return { result: actor, status: 200 };
   }
 
-  findAll() {
-    return `This action returns all actor`;
+  async findAll() {
+    const actors = await this.prismaService.actor.findMany();
+
+    return { result: actors, status: 200 };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} actor`;
+  async findOne(id: string) {
+    const actorId = Number(id);
+
+    const detail = await this.prismaService.actor.findUnique({
+      where: { id: actorId },
+    });
+
+    return { result: detail, status: 200 };
   }
 
-  update(id: number, updateActorDto: UpdateActorDto) {
-    return `This action updates a #${id} actor`;
+  async update(id: string, updateActorDto: UpdateActorDto) {
+    const actorId = Number(id);
+    const actor = await this.prismaService.actor.update({
+      where: {
+        id: actorId,
+      },
+      data: {
+        actorName: updateActorDto.actorName,
+      },
+    });
+
+    return { result: actor, status: 200 };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} actor`;
+  async remove(id: string) {
+    const actorId = Number(id);
+    const detail = await this.prismaService.actor.delete({
+      where: { id: actorId },
+    });
+
+    return { result: detail, status: 200 };
   }
 }
