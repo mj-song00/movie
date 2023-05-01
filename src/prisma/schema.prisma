@@ -11,31 +11,27 @@ datasource db {
 }
 
 model Movie {
-  id          Int       @id @default(autoincrement())
-  title       String
-  point       Int
-  playTime    String
-  poster      String[]
-  director    Director  @relation(fields: [directorId], references: [id])
-  directorId  Int
-  character   Character @relation(fields: [characterId], references: [id])
-  characterId Int
-  genre       Genre     @relation(fields: [genreId], references: [id])
-  genreId     Int
+  id         Int      @id @default(autoincrement())
+  title      String
+  point      Int
+  playTime   String
+  poster     String[]
+  director   Director @relation(fields: [directorId], references: [id])
+  directorId Int
+  genre      Genre    @relation(fields: [genreId], references: [id])
+  genreId    Int
 }
 
 model Actor {
-  id        Int         @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   actorName String
-  Character Character[]
+  Play      Play[]
 }
 
 model Character {
-  id            Int     @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   characterName String
-  actor         Actor   @relation(fields: [actorId], references: [id])
-  actorId       Int
-  Movie         Movie[]
+  Play          Play[]
 }
 
 model Genre {
@@ -48,4 +44,12 @@ model Director {
   id           Int     @id @default(autoincrement())
   directorName String
   Movie        Movie[]
+}
+
+model Play {
+  id            Int       @id @default(autoincrement())
+  actorName     Actor     @relation(fields: [actorId], references: [id])
+  actorId       Int
+  characterName Character @relation(fields: [characterId], references: [id])
+  characterId   Int
 }
