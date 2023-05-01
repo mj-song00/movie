@@ -7,49 +7,64 @@ import { UpdateCharacterDto } from './dto/update-character.dto';
 export class CharacterService {
   constructor(private prisamService: PrismaService) {}
 
-  async create(createCharacterDto: CreateCharacterDto, id: string) {
+  async create(createCharacterDto: CreateCharacterDto) {
     const { characterName } = createCharacterDto;
     if (characterName === null || characterName === undefined)
       throw new BadRequestException();
-    const actorId = Number(id);
-    const actor = await this.prisamService.actor.findUnique({
-      where: { id: actorId },
+
+    const character = await this.prisamService.character.create({
+      data: { characterName },
     });
 
-    console.log(actor);
+    return { result: character, status: 200 };
+  }
 
-    //const character = this.prisamService.character.create({
-    // data: {
-    //   characterName: createCharacterDto.characterName,
-    //   actor: {
-    //     create: [
-    //       {
-    //         actorName: actor.actorName,
-    //       },
-    //     ],
-    //   },
-    // },
-    // include: {
-    //   actor: true,
-    // },
-    // });
+  async createPlay(characterId: string, actorId: string) {
+    const actor = Number(actorId);
+    const actorDetail = await this.prisamService.actor.findUnique({
+      where: { id: actor },
+    });
 
-    // return { result: character, status: 200 };
+    const id = Number(characterId);
+    const detail = await this.prisamService.character.findUnique({
+      where: { id: id },
+    });
+
+    const play = await this.prisamService.play.create({
+      data: {
+        characterId: detail.id,
+        actorId: actorDetail.id,
+      },
+    });
+    return { result: play, status: 200 };
   }
 
   async findAll() {
-    return `This action returns all character`;
+    const characters = await this.prisamService.character.findMany();
+    return { result: characters, status: 200 };
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} character`;
+    const detail = await this.prisamService.character.findUnique({
+      where: { id: id },
+    });
+    return { result: detail, status: 200 };
   }
 
   async update(id: number, updateCharacterDto: UpdateCharacterDto) {
-    return `This action updates a #${id} character`;
+    const detail = await this.prisamService.character.update({
+      where: { id: id },
+      data: {
+        characterName: updateCharacterDto.characterName,
+      },
+    });
+    return { result: detail, status: 200 };
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} character`;
+    const detail = await this.prisamService.character.delete({
+      where: { id: id },
+    });
+    return { result: detail, status: 200 };
   }
 }

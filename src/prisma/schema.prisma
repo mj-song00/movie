@@ -25,13 +25,13 @@ model Movie {
 model Actor {
   id        Int    @id @default(autoincrement())
   actorName String
-  Play      Play[]
+  play      Play[]
 }
 
 model Character {
   id            Int    @id @default(autoincrement())
   characterName String
-  Play          Play[]
+  play          Play[]
 }
 
 model Genre {
@@ -47,9 +47,9 @@ model Director {
 }
 
 model Play {
-  id            Int       @id @default(autoincrement())
-  actorName     Actor     @relation(fields: [actorId], references: [id])
-  actorId       Int
-  characterName Character @relation(fields: [characterId], references: [id])
-  characterId   Int
+  id          Int        @id @default(autoincrement())
+  Actor       Actor?     @relation(fields: [actorId], references: [id])
+  actorId     Int?
+  Character   Character? @relation(fields: [characterId], references: [id])
+  characterId Int?
 }
