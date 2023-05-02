@@ -22,25 +22,34 @@ export class MovieController {
   }
 
   @Get('/api/v1/movies')
-  findAll() {
-    return this.movieService.findAll();
+  findMovie(@Query('title') title: string) {
+    return this.movieService.findMovie(title);
   }
 
-  @Get(':id')
+  @Get('/api/v1/movies/:id')
   findOne(@Param('id') movieId: string) {
     return this.movieService.findOne(+movieId);
   }
 
-  @Patch('/api/v1/movies/:movieId/:playId')
+  @Patch('/api/v1/movies/:movieId/:playId/:genreId')
   update(
     @Param('movieId') movieId: string,
-    @Param('playId') playId: string,
+
     @Body() updateMovieDto: UpdateMovieDto,
   ) {
-    return this.movieService.update(+movieId, playId, updateMovieDto);
+    return this.movieService.update(+movieId, updateMovieDto);
   }
 
-  @Delete(':id')
+  @Patch('/:movieId/:playId/:genreId')
+  updatePlayAndGenre(
+    @Param('movieId') movieId: string,
+    @Param('playId') playId: string,
+    @Param('genreId') genreId: string,
+  ) {
+    return this.movieService.updatePlayAndGenre(+movieId, playId, genreId);
+  }
+
+  @Delete('/api/v1/movies/:id')
   remove(@Param('id') id: string) {
     return this.movieService.remove(+id);
   }

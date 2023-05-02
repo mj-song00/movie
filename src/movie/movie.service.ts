@@ -23,29 +23,54 @@ export class MovieService {
         playTime,
         description,
       },
+      include: {
+        director: true,
+        play: true,
+        genre: true,
+      },
     });
 
     return { result: movie, status: 200 };
   }
 
-  async findAll() {
-    const movie = await this.prismaService.movie.findMany();
+  async findMovie(title: string) {
+    const movie = await this.prismaService.movie.findMany({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: title,
+            },
+          },
+        ],
+      },
+      include: {
+        director: true,
+        play: true,
+        genre: true,
+      },
+    });
+
+    if (movie === null) throw new BadRequestException(`검색결과가 없습니다`);
 
     return { result: movie, status: 200 };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} movie`;
+  async findOne(id: number) {
+    const movie = await this.prismaService.movie.findUnique({
+      where: { id: id },
+      include: {
+        director: true,
+        play: true,
+        genre: true,
+      },
+    });
+
+    return { result: movie, status: 200 };
   }
 
-  async update(
-    moiveId: number,
-    playId: string,
-    updateMovieDto: UpdateMovieDto,
-  ) {
+  async update(moiveId: number, updateMovieDto: UpdateMovieDto) {
     const moive = Number(moiveId);
-    const play = Number(playId);
-
     const update = await this.prismaService.movie.update({
       where: { id: moive },
       data: {
@@ -53,9 +78,27 @@ export class MovieService {
         point: updateMovieDto.point,
         playTime: updateMovieDto.playTime,
         description: updateMovieDto.poster,
+      },
+    });
+    return { result: update, status: 200 };
+  }
+
+  async updatePlayAndGenre(moiveId: number, playId: string, genreId: string) {
+    const moive = Number(moiveId);
+    const play = Number(playId);
+    const genre = Number(genreId);
+
+    const update = await this.prismaService.movie.update({
+      where: { id: moive },
+      data: {
         play: {
           connect: {
             id: play,
+          },
+        },
+        genre: {
+          connect: {
+            id: genre,
           },
         },
       },
