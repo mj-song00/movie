@@ -34,16 +34,25 @@ export class DirectorController {
     return this.directorService.findOne(id);
   }
 
-  @Patch('/detail/:id')
+  @Patch('/detail/:directorId/:movieId')
   update(
-    @Param('id') id: string,
+    @Param('directorId') directorId: string,
+    @Param('movieId') movieId: string,
     @Body() updateDirectorDto: UpdateDirectorDto,
   ) {
-    return this.directorService.update(id, updateDirectorDto);
+    return this.directorService.update(directorId, movieId, updateDirectorDto);
   }
 
   @Delete('/detail/:id')
   remove(@Param('id') id: string) {
     return this.directorService.remove(id);
   }
+
+  // @Patch('/:directorId/:movieId')
+  // createMovieDirector(
+  //   @Param('directorId') directorId: string,
+  //   @Param('movieId') movieId: string,
+  // ) {
+  //   return this.directorService.createMovieDirector(directorId, movieId);
+  // }
 }

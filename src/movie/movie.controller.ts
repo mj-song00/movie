@@ -31,12 +31,13 @@ export class MovieController {
     return this.movieService.findOne(+movieId);
   }
 
-  @Patch('/api/v1/movies/:movieId')
+  @Patch('/api/v1/movies/:movieId/:playId')
   update(
     @Param('movieId') movieId: string,
+    @Param('playId') playId: string,
     @Body() updateMovieDto: UpdateMovieDto,
   ) {
-    return this.movieService.update(+movieId, updateMovieDto);
+    return this.movieService.update(+movieId, playId, updateMovieDto);
   }
 
   @Delete(':id')

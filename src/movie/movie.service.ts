@@ -38,11 +38,35 @@ export class MovieService {
     return `This action returns a #${id} movie`;
   }
 
-  update(moiveId: number, updateMovieDto: UpdateMovieDto) {
-    console.log(moiveId, updateMovieDto);
+  async update(
+    moiveId: number,
+    playId: string,
+    updateMovieDto: UpdateMovieDto,
+  ) {
+    const moive = Number(moiveId);
+    const play = Number(playId);
+
+    const update = await this.prismaService.movie.update({
+      where: { id: moive },
+      data: {
+        title: updateMovieDto.title,
+        point: updateMovieDto.point,
+        playTime: updateMovieDto.playTime,
+        description: updateMovieDto.poster,
+        play: {
+          connect: {
+            id: play,
+          },
+        },
+      },
+    });
+    return { result: update, status: 200 };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} movie`;
+  async remove(id: number) {
+    const movie = await this.prismaService.movie.delete({
+      where: { id: id },
+    });
+    return { result: movie, status: 200 };
   }
 }
