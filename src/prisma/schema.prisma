@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,15 +8,17 @@ datasource db {
 }
 
 model Movie {
-  id         Int      @id @default(autoincrement())
-  title      String
-  point      Int
-  playTime   String
-  poster     String[]
-  director   Director @relation(fields: [directorId], references: [id])
-  directorId Int
-  genre      Genre    @relation(fields: [genreId], references: [id])
-  genreId    Int
+
+  id          Int        @id @default(autoincrement())
+  title       String     @unique
+  point       Int
+  playTime    String
+  poster      String[]
+  description String
+  play        Play[]
+  genre       Genre[]
+  director    Director[]
+
 }
 
 model Actor {
@@ -35,15 +34,27 @@ model Character {
 }
 
 model Genre {
-  id    Int     @id @default(autoincrement())
-  type  String
-  Movie Movie[]
+  id      Int    @id @default(autoincrement())
+  type    String
+  Movie   Movie? @relation(fields: [movieId], references: [id])
+  movieId Int?
 }
 
 model Director {
-  id           Int     @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   directorName String
-  Movie        Movie[]
+  Movie        Movie? @relation(fields: [movieId], references: [id])
+  movieId      Int?
+}
+
+model Play {
+  id          Int        @id @default(autoincrement())
+  actorId     Int?
+  characterId Int?
+  Actor       Actor?     @relation(fields: [actorId], references: [id])
+  Character   Character? @relation(fields: [characterId], references: [id])
+  Movie       Movie?     @relation(fields: [movieId], references: [id])
+  movieId     Int?
 }
 
 model Play {

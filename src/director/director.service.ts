@@ -31,12 +31,23 @@ export class DirectorService {
     return { result: detail, status: 200 };
   }
 
-  async update(id: string, updateDirectorDto: UpdateDirectorDto) {
-    const directorId = Number(id);
+  async update(
+    directorId: string,
+    movieId: string,
+    updateDirectorDto: UpdateDirectorDto,
+  ) {
+    const director = Number(directorId);
+    const movie = Number(movieId);
+
     const detail = await this.prismaService.director.update({
-      where: { id: directorId },
+      where: { id: director },
       data: {
         directorName: updateDirectorDto.directorName,
+        Movie: {
+          connect: {
+            id: movie,
+          },
+        },
       },
     });
     return { result: detail, status: 200 };

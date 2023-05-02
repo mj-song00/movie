@@ -44,7 +44,8 @@ export class CharacterController {
     return this.characterService.remove(+id);
   }
 
-  @Patch('/paly/:characterId/:actorId')
+  @Patch('/play/:characterId/:actorId')
+
   createPlay(
     @Param('characterId') characterId: string,
     @Param('actorId') actorId: string,
