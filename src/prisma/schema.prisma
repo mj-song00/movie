@@ -8,7 +8,6 @@ datasource db {
 }
 
 model Movie {
-
   id          Int        @id @default(autoincrement())
   title       String     @unique
   point       Int
@@ -18,7 +17,6 @@ model Movie {
   play        Play[]
   genre       Genre[]
   director    Director[]
-
 }
 
 model Actor {
@@ -55,12 +53,4 @@ model Play {
   Character   Character? @relation(fields: [characterId], references: [id])
   Movie       Movie?     @relation(fields: [movieId], references: [id])
   movieId     Int?
-}
-
-model Play {
-  id          Int        @id @default(autoincrement())
-  Actor       Actor?     @relation(fields: [actorId], references: [id])
-  actorId     Int?
-  Character   Character? @relation(fields: [characterId], references: [id])
-  characterId Int?
 }
