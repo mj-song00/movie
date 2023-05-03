@@ -49,6 +49,6 @@ https://documenter.getpostman.com/view/23879843/2s93eU3aJR#16a4c33a-9c0a-4dd4-8c
 8. Movie 폴더의 Get All Movie는 title을 검색어로 갖는 쿼리 스트링으로 구현하였습니다.<br> title에 검색어가 있으면 모두 검색이 됩니다.
 
 ### 개선해야 할점
-
-- 현재 파일 업로드를 구현하지 못했습니다.
+- 현재 이미지 파일 업로드를 구현하지 못했습니다.
 - 유튜브 url 저장을 구현하지 못했습니다.
+- 관계설정할때 데이터의 delete 동작을 구현하지 못했습니다. 
