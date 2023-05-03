@@ -102,6 +102,10 @@ export class MovieService {
           },
         },
       },
+      include: {
+        play: true,
+        genre: true,
+      },
     });
     return { result: update, status: 200 };
   }

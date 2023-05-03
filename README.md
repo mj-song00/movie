@@ -8,6 +8,7 @@
 4.  .env에 schema.prisma에 DATABASE_URL을 입력해주세요.<br>
     저는 postgresQl을 사용하였습니다. 다른 DataBase를 사용하시는 분은 https://www.prisma.io/docs/concepts/database-connectors 를 참고해 주세요.
 5.  터미널에 npm run start를 입력해주세요. Nest가 시작됩니다.
+6.  다른 터미널을 열어 해당 폴더로 이동한 뒤, npx prisma studio를 입력해주세요.<br> prsima studio로 현재 저장된 데이터를 볼 수 있습니다.
 
 ❖ 다른 폴더에 있을경우 prisma 오류가 발생할 수도 있습니다. 현재 있는곳이 movie/src 인지 확인해 주세요<br>
 ❖ src 폴더에 있음에도 오류가 나는경우
@@ -44,7 +45,7 @@ https://documenter.getpostman.com/view/23879843/2s93eU3aJR#16a4c33a-9c0a-4dd4-8c
 4. Genre 폴더안에 있는 Post Create Genre 요청을 보내주세요.
 5. Charactor 폴더 안에 있는 Post Create Charactor요청을 보내주세요.
 6. Charactor 폴더에 있는 Patch Patch Play Charcater with ActorId 요청을 보내주세요. Play 테이블에 저장됩니다.
-7. Director 폴더에 있는 Patch Patch Movie by Director 요청을 보내주세요.<br> Movie 테이블에 director가 반영됩니다.
+7. Director 폴더에 있는 Update Director (with movieId) 요청을 보내주세요.<br> Movie 테이블에 director가 반영됩니다.
 8. Movie 폴더의 Get All Movie는 title을 검색어로 갖는 쿼리 스트링으로 구현하였습니다.<br> title에 검색어가 있으면 모두 검색이 됩니다.
 
 ### 개선해야 할점
