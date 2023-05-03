@@ -6,7 +6,7 @@
     npx prisma generate
     를 입력해주세요. 정상적으로 실행되면 .env가 생성됩니다.
 4.  .env에 schema.prisma에 DATABASE_URL을 입력해주세요.<br>
-    저는 postgresQl을 사용하였습니다. 다른 DataBase를 사용하시는 분은 https://www.prisma.io/docs/concepts/database-connectors 를 참고해 주세요.
+    저는 PostgresQl을 사용하였습니다. 다른 DataBase를 사용하시는 분은 https://www.prisma.io/docs/concepts/database-connectors 를 참고해 주세요.
 5.  터미널에 npm run start를 입력해주세요. Nest가 시작됩니다.
 6.  다른 터미널을 열어 해당 폴더로 이동한 뒤, npx prisma studio를 입력해주세요.<br> prsima studio로 현재 저장된 데이터를 볼 수 있습니다.
 
@@ -14,16 +14,15 @@
 ❖ src 폴더에 있음에도 오류가 나는경우
 npm install prisma --save-dev
 npx prisma init
-npx prisma generate
+npx prisma generate<br>
 17번 줄까지 터미널에 입력했음에도 실행되지 않을경우 아래 명령어도 입력해주세요.
-(npx prisma db push
-npx prisma migrate dev)
+<br>(npx prisma db push, <br> npx prisma migrate dev)
 
 ### API문서
 
 본 문서는 Postman API명세서로 작성되었습니다.
 
-https://documenter.getpostman.com/view/23879843/2s93eU3aJR#16a4c33a-9c0a-4dd4-8cf8-f42409a145e4
+https://documenter.getpostman.com/view/23879843/2s93eU3aJR
 
 ### ERD
 
