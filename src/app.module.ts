@@ -9,7 +9,14 @@ import { CharacterModule } from './character/character.module';
 import { MovieModule } from './movie/movie.module';
 
 @Module({
-  imports: [ActorModule, ActorModule, DirectorModule, GenreModule, CharacterModule, MovieModule],
+  imports: [
+    ActorModule,
+    ActorModule,
+    DirectorModule,
+    GenreModule,
+    CharacterModule,
+    MovieModule,
+  ],
 
   controllers: [AppController],
   providers: [AppService],
