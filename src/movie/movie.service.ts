@@ -8,7 +8,8 @@ export class MovieService {
   constructor(private prismaService: PrismaService) {}
 
   async create(createMovieDto: CreateMovieDto) {
-    const { title, point, playTime, description } = createMovieDto;
+    const { title, point, playTime, description, director, gnere, play } =
+      createMovieDto;
 
     const isExist = await this.prismaService.movie.findUnique({
       where: { title },
@@ -83,32 +84,32 @@ export class MovieService {
     return { result: update, status: 200 };
   }
 
-  async updatePlayAndGenre(moiveId: number, playId: string, genreId: string) {
-    const moive = Number(moiveId);
-    const play = Number(playId);
-    const genre = Number(genreId);
+  // async updatePlayAndGenre(moiveId: number, playId: string, genreId: string) {
+  //   const moive = Number(moiveId);
+  //   const play = Number(playId);
+  //   const genre = Number(genreId);
 
-    const update = await this.prismaService.movie.update({
-      where: { id: moive },
-      data: {
-        play: {
-          connect: {
-            id: play,
-          },
-        },
-        genre: {
-          connect: {
-            id: genre,
-          },
-        },
-      },
-      include: {
-        play: true,
-        genre: true,
-      },
-    });
-    return { result: update, status: 200 };
-  }
+  //   const update = await this.prismaService.movie.update({
+  //     where: { id: moive },
+  //     data: {
+  //       play: {
+  //         connect: {
+  //           id: play,
+  //         },
+  //       },
+  //       genre: {
+  //         connect: {
+  //           id: genre,
+  //         },
+  //       },
+  //     },
+  //     include: {
+  //       play: true,
+  //       genre: true,
+  //     },
+  //   });
+  //   return { result: update, status: 200 };
+  // }
 
   async remove(id: number) {
     const movie = await this.prismaService.movie.delete({

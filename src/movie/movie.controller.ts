@@ -43,16 +43,6 @@ export class MovieController {
     return this.movieService.update(+movieId, updateMovieDto);
   }
 
-  // movie, play, genre 연결
-  @Patch('/:movieId/:playId/:genreId')
-  updatePlayAndGenre(
-    @Param('movieId') movieId: string,
-    @Param('playId') playId: string,
-    @Param('genreId') genreId: string,
-  ) {
-    return this.movieService.updatePlayAndGenre(+movieId, playId, genreId);
-  }
-
   // movie 정보 삭제
   @Delete('/api/v1/movies/:id')
   remove(@Param('id') id: string) {

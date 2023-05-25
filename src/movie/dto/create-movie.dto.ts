@@ -15,5 +15,7 @@ export class CreateMovieDto {
   @IsNotEmpty()
   description: string;
 
-  play?: string[];
+  play?: number[];
+  gnere?: number[];
+  director?: number[];
 }

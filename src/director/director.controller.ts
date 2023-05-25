@@ -38,14 +38,14 @@ export class DirectorController {
   }
 
   // movie와 director 관계 연결
-  @Patch('/detail/:directorId/:movieId')
-  update(
-    @Param('directorId') directorId: string,
-    @Param('movieId') movieId: string,
-    @Body() updateDirectorDto: UpdateDirectorDto,
-  ) {
-    return this.directorService.update(directorId, movieId, updateDirectorDto);
-  }
+  // @Patch('/detail/:directorId/:movieId')
+  // update(
+  //   @Param('directorId') directorId: string,
+  //   @Param('movieId') movieId: string,
+  //   @Body() updateDirectorDto: UpdateDirectorDto,
+  // ) {
+  //   return this.directorService.update(directorId, movieId, updateDirectorDto);
+  // }
 
   // director 삭제
   @Delete('/detail/:id')

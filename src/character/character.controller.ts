@@ -50,11 +50,11 @@ export class CharacterController {
   }
 
   // character와 actor 연결
-  @Patch('/play/:characterId/:actorId')
-  createPlay(
-    @Param('characterId') characterId: string,
-    @Param('actorId') actorId: string,
-  ) {
-    return this.characterService.createPlay(characterId, actorId);
-  }
+  // @Patch('/play/:characterId/:actorId')
+  // createPlay(
+  //   @Param('characterId') characterId: string,
+  //   @Param('actorId') actorId: string,
+  // ) {
+  //   return this.characterService.createPlay(characterId, actorId);
+  // }
 }

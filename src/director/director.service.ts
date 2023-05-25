@@ -31,27 +31,27 @@ export class DirectorService {
     return { result: detail, status: 200 };
   }
 
-  async update(
-    directorId: string,
-    movieId: string,
-    updateDirectorDto: UpdateDirectorDto,
-  ) {
-    const director = Number(directorId);
-    const movie = Number(movieId);
+  // async update(
+  //   directorId: string,
+  //   movieId: string,
+  //   updateDirectorDto: UpdateDirectorDto,
+  // ) {
+  //   const director = Number(directorId);
+  //   const movie = Number(movieId);
 
-    const detail = await this.prismaService.director.update({
-      where: { id: director },
-      data: {
-        directorName: updateDirectorDto.directorName,
-        Movie: {
-          connect: {
-            id: movie,
-          },
-        },
-      },
-    });
-    return { result: detail, status: 200 };
-  }
+  //   const detail = await this.prismaService.director.update({
+  //     where: { id: director },
+  //     data: {
+  //       directorName: updateDirectorDto.directorName,
+  //       Movie: {
+  //         connect: {
+  //           id: movie,
+  //         },
+  //       },
+  //     },
+  //   });
+  //   return { result: detail, status: 200 };
+  // }
 
   async remove(id: string) {
     const directorId = Number(id);
